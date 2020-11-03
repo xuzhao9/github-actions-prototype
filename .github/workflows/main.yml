@@ -1,0 +1,10 @@
+name: CI
+on: push
+
+jobs:
+  test:
+    runs-on: [self-hosted, bm-ec2]
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./scripts/init.sh
+        shell: bash
