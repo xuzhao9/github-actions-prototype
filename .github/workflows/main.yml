@@ -10,6 +10,6 @@ jobs:
         shell: bash
       - uses: actions/upload-artifact@v2
         with:
-          name: benchmark-result-${GITHUB_RUN_ID}
+          name: benchmark-result-${{ github.run_id }}-${{ github.run_number }}.html
           path: '~/artifact-figures/figure-latest.html'
       - run: bash ./scripts/cleanup.sh
