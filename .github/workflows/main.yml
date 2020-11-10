@@ -8,3 +8,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: bash ./scripts/init.sh
         shell: bash
+      - uses: actions/upload-artifact@v2
+        with:
+          name: benchmark-result-${GITHUB_RUN_ID}
+          path: '~/artifact-figures/figure-latest.html'
+      - run: bash ./scripts/cleanup.sh
