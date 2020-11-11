@@ -1,15 +1,20 @@
-name: CI
+name: pytorch-benchmarking
 on: push
 
 jobs:
-  test:
+  build-docker:
     runs-on: [self-hosted, bm-ec2]
     steps:
       - uses: actions/checkout@v2
+      - run: bash ./scripts/build-docker.sh
+  test:
+    runs-on: [self-hosted, bm-ec2]
+    deps: build-docker
+    steps:
       - run: bash ./scripts/init.sh
         shell: bash
       - uses: actions/upload-artifact@v2
         with:
-          name: benchmark-result-${{ github.run_id }}-${{ github.run_number }}.html
+          name: benchmark-result-${{ github.run_id }}-${{ github.run_number }}
           path: '~/artifact-figures/figure-latest.html'
       - run: bash ./scripts/cleanup.sh
