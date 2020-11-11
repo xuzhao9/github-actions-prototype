@@ -6,15 +6,14 @@ PYTORCH_SRC=${HOME}/code/pytorch
 
 # Checkout pytorch code
 mkdir -p ~/code
-
 if [ -d $PYTORCH_SRC ]
+then
     # Update the code
     pushd $PYTORCH_SRC && git pull
     popd
-then
+else
     # Fetch the newest code
     git clone https://github.com/pytorch/pytorch.git $PYTORCH_SRC
-else
 fi
 
 # Build the nightly docker
