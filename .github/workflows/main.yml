@@ -8,8 +8,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: bash ./scripts/build-docker.sh
   test:
+    needs: build-docker
     runs-on: [self-hosted, bm-ec2]
-    deps: build-docker
     steps:
       - run: bash ./scripts/init.sh
         shell: bash
