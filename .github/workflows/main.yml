@@ -15,6 +15,7 @@ jobs:
   run-benchmark:
     needs: build-benchmark-docker
     runs-on: [self-hosted, bm-ec2]
+    timeout-minutes: 1440
     steps:
       - run: bash ./scripts/run-benchmark.sh
   # upload-result:
