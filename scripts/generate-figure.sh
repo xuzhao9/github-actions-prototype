@@ -9,12 +9,10 @@ RESULTS_DIR=${HOME}/benchmark-results
 # Directory that stores the nightly figures
 FIGURES_DIR=${HOME}/artifact-figures
 
-# Run the Docker
+# TODO: We should allow each nightly build to be run multiple times
+# And should use the latest run for each nightly build to generate the figure
 
-# We allow each nightly build to be run multiple times
-# We use the latest run for each nightly build to generate the figure
-
-# Link the artifacts 
+# Link the latest artifacts 
 # rm ${FIGURES_DIR}/artifact-figure-latest.html
 # ln -s ${FIGURES_DIR}/${LATEST_FIGURE} ${FIGURES_DIR}/artifact-figure-latest.html
 

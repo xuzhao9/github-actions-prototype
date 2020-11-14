@@ -12,11 +12,11 @@ jobs:
     runs-on: [self-hosted, bm-ec2]
     steps:
       - run: bash ./scripts/build-benchmark-docker.sh
-  # run-benchmark:
-  #   needs: build-benchmark-docker
-  #   runs-on: [self-hosted, bm-ec2]
-  #   steps:
-  #     - run: bash ./scripts/run-benchmark.sh
+  run-benchmark:
+    needs: build-benchmark-docker
+    runs-on: [self-hosted, bm-ec2]
+    steps:
+      - run: bash ./scripts/run-benchmark.sh
   # upload-result:
   #   needs: run-benchmark
   #   runs-on: [self-hosted, bm-ec2]
