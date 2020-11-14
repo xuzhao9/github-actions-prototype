@@ -2,22 +2,22 @@
 
 set -euo pipefail
 
-PYTORCH_SRC=${HOME}/code/pytorch
+PYTORCH_GITGHUB="https://github.com/pytorch/pytorch.git"
+PYTORCH_SRC=${HOME}/pytorch
 
 # Checkout pytorch code
-mkdir -p ~/code
 if [ -d $PYTORCH_SRC ]
 then
     # Update the code
-    pushd $PYTORCH_SRC && git pull
+    pushd $PYTORCH_SRC && git pull origin master
     popd
 else
     # Fetch the newest code
-    git clone https://github.com/pytorch/pytorch.git $PYTORCH_SRC
+    git clone $PYTORCH_GITHUB $PYTORCH_SRC
 fi
 
 # Build the nightly docker
 pushd $PYTORCH_SRC
-make -f docker.Makefile INSTALL_CHANNEL=pytorch-nightly BUILD_TYPE=official devel-image
+make -f docker.Makefile PYTHON_VERSION=3.7 INSTALL_CHANNEL=pytorch-nightly BUILD_TYPE=official devel-image
 popd
 

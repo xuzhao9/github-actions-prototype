@@ -7,14 +7,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: bash ./scripts/build-docker.sh
-  test:
+  build-benchmark-docker:
     needs: build-docker
     runs-on: [self-hosted, bm-ec2]
     steps:
-      - run: bash ./scripts/init.sh
-        shell: bash
-      - uses: actions/upload-artifact@v2
-        with:
-          name: benchmark-result-${{ github.run_id }}-${{ github.run_number }}
-          path: '~/artifact-figures/figure-latest.html'
-      - run: bash ./scripts/cleanup.sh
+      - run: bash ./scripts/build-benchmark-docker.sh
+  # run-benchmark:
+  #   needs: build-benchmark-docker
+  #   runs-on: [self-hosted, bm-ec2]
+  #   steps:
+  #     - run: bash ./scripts/run-benchmark.sh
+  # upload-result:
+  #   needs: run-benchmark
+  #   runs-on: [self-hosted, bm-ec2]
+  #   steps:
+  #     - run: bash ./scripts/generate-figure.sh
+  #       shell: bash
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: benchmark-result-${{ github.run_id }}-${{ github.run_number }}
+  #         path: '~/artifact-figures/figure-latest.html'
+  #     - run: bash ./scripts/cleanup.sh
