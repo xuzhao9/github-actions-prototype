@@ -28,7 +28,7 @@ for c in $(seq 1 $NUM_ITER); do
     taskset -c "${CORE_LIST}" pytest test_bench.py -k "${BENCHMARK_FILTER}" --benchmark-min-rounds "${NUM_ROUNDS}" \
                               --benchmark-json /output/${DATA_JSON_PREFIX}_${c}.json
     # Fill in circle_build_num and circle_project_reponame
-    jq --arg run_id "${GITHUB_RUN_ID}" '.machine_info.circle_project_name=githubactions-benchmark | .machine_info.circle_build_num=$run_id' \
+    jq --arg run_id "${GITHUB_RUN_ID}" '.machine_info.circle_project_name="githubactions-benchmark" | .machine_info.circle_build_num=$run_id' \
        /output/${DATA_JSON_PREFIX}_${c}.json > /output/${DATA_JSON_PREFIX}_${c}.json.tmp
     mv /output/${DATA_JSON_PREFIX}_${c}.json.tmp /output/${DATA_JSON_PREFIX}_${c}.json
 done
