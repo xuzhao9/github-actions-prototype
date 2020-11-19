@@ -10,6 +10,6 @@ TORCH_ID=$(echo $TORCH_LATEST | tr -s ' ' | cut -d ' ' -f3)
 
 echo "Building benchmark docker using pytorch docker $TORCH_ID..."
 
-sed -i 's,FROM pytorch,FROM '"$TORCH_ID"',' docker/Dockerfile
+sed -i 's,FROM pytorch,FROM '"$TORCH_ID"',' Dockerfile
 docker build -t $(id -un)/pytorch-benchmark:$TODAY .
-sed -i 's,FROM '"$TORCH_ID"',FROM pytorch,' docker/Dockerfile
+sed -i 's,FROM '"$TORCH_ID"',FROM pytorch,' Dockerfile
