@@ -15,17 +15,11 @@ jobs:
   run-benchmark:
     needs: build-benchmark-docker
     runs-on: [self-hosted, bm-ec2]
-    timeout-minutes: 1440
+    timeout-minutes: 360
     steps:
-      - run: bash ./scripts/run-benchmark.sh
-  # upload-result:
+      - run: bash ./scripts/run-docker.sh /runner/run-benchmark.sh
+  # upload-scribe:
   #   needs: run-benchmark
   #   runs-on: [self-hosted, bm-ec2]
   #   steps:
-  #     - run: bash ./scripts/generate-figure.sh
-  #       shell: bash
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: benchmark-result-${{ github.run_id }}-${{ github.run_number }}
-  #         path: '~/artifact-figures/figure-latest.html'
-  #     - run: bash ./scripts/cleanup.sh
+  #     - run: bash ./scripts/run-docker.sh /runner/upload-scribe.sh

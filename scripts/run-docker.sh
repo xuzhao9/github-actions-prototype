@@ -1,27 +1,28 @@
 #!/bin/sh
 
-set -eo pipefail
+set -euo pipefail
 
-# This machine has 16 physical cores, we use 12 of them to test
-CORE_LIST="4-15"
-export GOMP_CPU_AFFINITY="${CORE_LIST}"
+# Parameters
+RUN_SCRIPT=$1
+TODAY=$(date +"%Y%m%d")
+DATA_DIR=${HOME}/benchmark-results/${TODAY}_gh${GITHUB_RUN_ID}
+
 export CUDA_VISIBLE_DEVICES=0
 
-NUM_ITER=1
-NO_TURBO_FILE="/sys/devices/system/cpu/intel_pstate/no_turbo"
-DATA_JSON_PREFIX=$(date +"%Y%m%d_%H%M%S")
-BENCHMARK_FILTER="(not slomo)"
+# Use the latest pytorch image
+TORCH_IMAGE=$(docker images | grep "pytorch-benchmark" | sed -n '1 p')
+TORCH_IMAGE_ID=$(echo $TORCH_IMAGE | tr -s ' ' | cut -d' ' -f3)
 
-conda init bash; conda run /bin/bash
+echo "Running pytorch-benchmark image ${TORCH_IMAGE_ID}"
 
-if [[ -e ${NO_TURBO_FILE} ]]; then
-    sh -c "echo 1 > ${NO_TURBO_FILE}"
-fi
+mkdir -p ${DATA_DIR}
 
-pushd /workspace/benchmark
+# Nvidia won't let this run in docker
+sudo nvidia-smi -ac 5001,900
 
-for c in $(seq 1 $NUM_ITER); do
-    echo "Run pytorch/benchmark for ${TORCH_VER} iter ${c}"
-    taskset -c "${CORE_LIST}" pytest test_bench.py -k "${BENCHMARK_FILTER}" --benchmark-min-rounds 20 \
-                              --benchmark-json /output/${DATA_JSON_PREFIX}_${c}.json
-done
+docker run \
+       --volume="${PWD}:/runner" \
+       --volume="${DATA_DIR}:/output" \
+       --gpus=all \
+       $TORCH_IMAGE_ID \
+       bash ${RUN_SCRIPT}
