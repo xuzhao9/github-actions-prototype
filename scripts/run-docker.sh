@@ -21,12 +21,12 @@ mkdir -p ${DATA_DIR}
 sudo nvidia-smi -ac 5001,900
 
 docker run \
-       --env ${GITHUB_RUN_ID} \
+       --env GITHUB_RUN_ID \
        --volume="${PWD}:/runner" \
        --volume="${DATA_DIR}:/output" \
        --gpus=all \
        $TORCH_IMAGE_ID \
        bash ${RUN_SCRIPT}
 
-echo "Benchmark finished successfully. Output data dir: ${DATA_DIR}."
+echo "Benchmark finished successfully. Output data dir is benchmark-results/${TODAY}_gh${GITHUB_RUN_ID}."
 
