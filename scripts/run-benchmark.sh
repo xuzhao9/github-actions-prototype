@@ -10,7 +10,8 @@ export CUDA_VISIBLE_DEVICES=0
 NUM_ITER=1
 NO_TURBO_FILE="/sys/devices/system/cpu/intel_pstate/no_turbo"
 DATA_JSON_PREFIX=$(date +"%Y%m%d_%H%M%S")
-BENCHMARK_FILTER="(not slomo)"
+BENCHMARK_FILTER="(BERT_pytorch)"
+# BENCHMARK_FILTER="(not slomo)"
 
 conda init bash; conda run /bin/bash
 
