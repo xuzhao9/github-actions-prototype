@@ -16,12 +16,12 @@ jobs:
     needs: build-benchmark-docker
     runs-on: [self-hosted, bm-ec2]
     timeout-minutes: 360
-    env:
-      SCRIBE_GRAPHQL_ACCESS_TOKEN: ${{ secrets.SCRIBE_GRAPHQL_ACCESS_TOKEN }}
     steps:
       - run: bash ./scripts/run-docker.sh /runner/scripts/run-benchmark.sh
   upload-scribe:
     needs: run-benchmark
     runs-on: [self-hosted, bm-ec2]
+    env:
+      SCRIBE_GRAPHQL_ACCESS_TOKEN: ${{ secrets.SCRIBE_GRAPHQL_ACCESS_TOKEN }}
     steps:
       - run: bash ./scripts/run-docker.sh /runner/scripts/upload-scribe.sh
