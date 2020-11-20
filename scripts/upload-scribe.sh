@@ -4,6 +4,11 @@
 
 set -eo pipefail
 
+if [[ ! -v SCRIBE_GRAPHQL_ACCESS_TOKEN ]]; then
+    echo "SCRIBE_GRAPHQL_ACCESS_TOKEN is not set! Please check your environment variable. Stop."
+    exit 1
+fi
+
 pushd /workspace/benchmark/score
 
 sed -i 's,Super_SloMo:,# Super_SloMo:,' score.yml
