@@ -24,4 +24,4 @@ jobs:
     needs: run-benchmark
     runs-on: [self-hosted, bm-ec2]
     steps:
-      - run: bash ./scripts/run-docker.sh /runner/upload-scribe.sh
+      - run: bash ./scripts/run-docker.sh /runner/scripts/upload-scribe.sh
