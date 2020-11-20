@@ -6,6 +6,7 @@ set -eo pipefail
 
 pushd /workspace/benchmark/score
 
+sed -i 's,Super_SloMo:,# Super_SloMo:,' score.yml
 TORCHBENCH_SCORE=$(python compute_score.py --benchmark_data_dir /output | awk 'NR>2' )
 
 IFS=$'\n'
