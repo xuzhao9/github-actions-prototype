@@ -22,6 +22,7 @@ sudo nvidia-smi -ac 5001,900
 
 docker run \
        --env GITHUB_RUN_ID \
+       --env SCRIBE_GRAPHQL_ACCESS_TOKEN \
        --volume="${PWD}:/runner" \
        --volume="${DATA_DIR}:/output" \
        --gpus=all \
