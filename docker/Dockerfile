@@ -1,7 +1,7 @@
 FROM pytorch
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV BENCHMARK_REPO https://github.com/pytorch/benchmark.git
+ENV BENCHMARK_REPO https://github.com/xuzhao9/benchmark.git
 
 RUN /opt/conda/bin/conda clean -tipsy && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
@@ -12,5 +12,5 @@ RUN /opt/conda/bin/conda clean -tipsy && \
 RUN apt-get update
 RUN apt-get install git jq ffmpeg libsm6 libxext6 -y
 
-RUN git clone ${BENCHMARK_REPO} /workspace/benchmark
+RUN git clone -b enable-partial-config ${BENCHMARK_REPO} /workspace/benchmark
 RUN cd /workspace/benchmark; python install.py

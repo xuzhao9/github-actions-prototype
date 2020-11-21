@@ -15,7 +15,7 @@ pushd /workspace/benchmark/score
 python generate_score_config.py --specification score.yml \
        --normalization_data $(find /output -name "*.json" | head -n 1) \
        --output_file benchmark_config.json \
-       --target_score 1000
+       --target_score 1000 --partial
 
 TORCHBENCH_SCORE=$(python compute_score.py --configuration benchmark_config.json --benchmark_data_dir /output | awk 'NR>2' )
 mv benchmark_config.json /output
