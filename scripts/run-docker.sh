@@ -17,8 +17,12 @@ echo "Running pytorch-benchmark image ${TORCH_IMAGE_ID}"
 
 mkdir -p ${DATA_DIR}
 
-# Nvidia won't let this run in docker
-sudo nvidia-smi -ac 5001,900
+# Nvidia won't let this run inside docker
+# Make sure the Nvidia GPU is in persistence mode
+sudo nvidia-smi -pm ENABLED -i 0
+# Set the <memory, graphics> clock frequency
+# Need further study on how Nvidia card throttling affect overall performance variance
+sudo nvidia-smi -ac 5001,1500
 
 docker run \
        --env GITHUB_RUN_ID \
