@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-NUM_ITER=10
+NUM_ITER=20
 NUM_ROUNDS=20
 DATA_JSON_PREFIX=$(date +"%Y%m%d_%H%M%S")
 # BENCHMARK_FILTER="(BERT_pytorch)"
