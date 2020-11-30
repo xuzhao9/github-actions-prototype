@@ -2,11 +2,11 @@
 
 set -eo pipefail
 
-NUM_ITER=10
+NUM_ITER=1
 NUM_ROUNDS=20
 DATA_JSON_PREFIX=$(date +"%Y%m%d_%H%M%S")
-# BENCHMARK_FILTER="(BERT_pytorch)"
-BENCHMARK_FILTER="(not slomo)"
+BENCHMARK_FILTER="(BERT_pytorch)"
+# BENCHMARK_FILTER="(not slomo)"
 
 # This machine has 16 physical cores, we use 12 of them to test
 CORE_LIST="4-15"
