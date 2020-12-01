@@ -1,11 +1,8 @@
 name: pytorch-nightly-benchmarking
 on:
-   # push:
-   #   branches:
-   #     master
-   [push, workflow_dispatch]
-#  schedule:
-#    - cron: '0 8 * * *' # run at 8 AM UTC
+  workflow_dispatch
+  schedule:
+    - cron: '0 8 * * *' # run at 8 AM UTC
 
 jobs:
   build-docker:
