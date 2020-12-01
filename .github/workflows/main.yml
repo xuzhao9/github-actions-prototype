@@ -1,8 +1,8 @@
 name: pytorch-nightly-benchmarking
 on:
-   push:
-     branches:
-       master
+   # push:
+   #   branches:
+   #     master
    workflow_dispatch:
      tags:
        description: 'Manually trigger the testing'
