@@ -2,8 +2,7 @@
 
 # [FB Internal] Upload every json file to Scribe
 
-# Use the config v0
-CONFIG_FILE=/config/config-v0-notacotron-noslomo.json
+CONFIG_FILE=/config/config-${CONFIG_VER}.json
 
 set -eo pipefail
 

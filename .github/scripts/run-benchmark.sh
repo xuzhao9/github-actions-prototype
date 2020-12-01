@@ -2,16 +2,9 @@
 
 set -eo pipefail
 
-NUM_ITER=1
-NUM_ROUNDS=20
 DATA_JSON_PREFIX=$(date +"%Y%m%d_%H%M%S")
-BENCHMARK_FILTER="(not slomo)"
-# BENCHMARK_FILTER="(BERT_pytorch)"
-
-# This machine has 16 physical cores, we use 12 of them to test
-CORE_LIST="4-15"
 export GOMP_CPU_AFFINITY="${CORE_LIST}"
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_VISIBLE_DEVICES="${GPU_LIST}"
 
 NO_TURBO_FILE="/sys/devices/system/cpu/intel_pstate/no_turbo"
 
