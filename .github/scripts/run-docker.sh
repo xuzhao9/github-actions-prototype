@@ -38,7 +38,7 @@ sudo nvidia-smi -ac ${GPU_FREQUENCY}
 docker run \
        --env GITHUB_RUN_ID \
        --env SCRIBE_GRAPHQL_ACCESS_TOKEN \
-       --env_file=${CONFIG_ENV} \
+       --env-file=${CONFIG_ENV} \
        --volume="${PWD}:/runner" \
        --volume="${DATA_DIR}:/output" \
        --volume="${CONFIG_DIR}:/config" \
