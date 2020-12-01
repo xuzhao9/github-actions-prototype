@@ -12,12 +12,13 @@ TODAY=$(date +"%Y%m%d")
 CONFIG_DIR=${BASE_DIR}/../configs/${CONFIG_VER}
 CONFIG_ENV=${CONFIG_DIR}/config-${CONFIG_VER}.env
 DATA_DIR=${HOME}/benchmark-results/${TODAY}_gh${GITHUB_RUN_ID}
-export CUDA_VISIBLE_DEVICES=${GPU_LIST}
 
 # Load environment variables
 set -a
 source ${CONFIG_ENV}
 set +a
+
+export CUDA_VISIBLE_DEVICES=${GPU_LIST}
 
 # Use the latest pytorch image
 TORCH_IMAGE=$(docker images | grep "pytorch-benchmark" | sed -n '1 p')
