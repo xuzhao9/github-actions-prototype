@@ -2,7 +2,7 @@
 
 # [FB Internal] Upload every json file to Scribe
 
-CONFIG_FILE=/config/config-${CONFIG_VER}.json
+CONFIG_FILE=/config/${CONFIG_FILE}
 
 set -eo pipefail
 
