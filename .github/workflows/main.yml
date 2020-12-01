@@ -1,7 +1,8 @@
 name: pytorch-nightly-benchmarking
 on:
-  schedule:
-    - cron: '0 8 * * *' # run at 8 AM UTC
+    push
+#  schedule:
+#    - cron: '0 8 * * *' # run at 8 AM UTC
 
 jobs:
   build-docker:
