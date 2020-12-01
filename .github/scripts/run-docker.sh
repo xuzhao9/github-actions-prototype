@@ -7,9 +7,8 @@ CONFIG_VER=v0
 
 # Run Parameters
 RUN_SCRIPT=$1
-BASE_DIR=$(dirname "$0")
 TODAY=$(date +"%Y%m%d")
-CONFIG_DIR=${BASE_DIR}/../configs/${CONFIG_VER}
+CONFIG_DIR=${PWD}/.github/configs/${CONFIG_VER}
 CONFIG_ENV=${CONFIG_DIR}/config-${CONFIG_VER}.env
 DATA_DIR=${HOME}/benchmark-results/${TODAY}_gh${GITHUB_RUN_ID}
 
