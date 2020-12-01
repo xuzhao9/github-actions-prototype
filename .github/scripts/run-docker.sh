@@ -5,6 +5,7 @@ set -euo pipefail
 # Parameters
 RUN_SCRIPT=$1
 TODAY=$(date +"%Y%m%d")
+CONFIG_DIR=${HOME}/benchmark-configs
 DATA_DIR=${HOME}/benchmark-results/${TODAY}_gh${GITHUB_RUN_ID}
 
 export CUDA_VISIBLE_DEVICES=0
@@ -29,7 +30,8 @@ docker run \
        --env SCRIBE_GRAPHQL_ACCESS_TOKEN \
        --volume="${PWD}:/runner" \
        --volume="${DATA_DIR}:/output" \
-       --gpus=all \
+       --volume="${CONFIG_DIR}:/config" \
+       --gpus device=0 \
        $TORCH_IMAGE_ID \
        bash ${RUN_SCRIPT}
 
