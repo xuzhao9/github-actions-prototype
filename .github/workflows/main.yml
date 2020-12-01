@@ -1,6 +1,6 @@
 name: pytorch-nightly-benchmarking
 on:
-  workflow_dispatch
+  workflow_dispatch:
   schedule:
     - cron: '0 8 * * *' # run at 8 AM UTC
 
