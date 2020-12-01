@@ -7,17 +7,16 @@ CONFIG_VER=v0
 
 # Run Parameters
 RUN_SCRIPT=$1
+BASE_DIR=$(dirname "$0")
 TODAY=$(date +"%Y%m%d")
-CONFIG_DIR=${PWD}/.github/configs/${CONFIG_VER}
+CONFIG_DIR=${BASE_DIR}/../configs/${CONFIG_VER}
 CONFIG_ENV=${CONFIG_DIR}/config-${CONFIG_VER}.env
 DATA_DIR=${HOME}/benchmark-results/${TODAY}_gh${GITHUB_RUN_ID}
 
 # Load environment variables
-set -a
+set -a;
 source ${CONFIG_ENV}
-set +a
-
-export CUDA_VISIBLE_DEVICES=${GPU_LIST}
+set +a;
 
 # Use the latest pytorch image
 TORCH_IMAGE=$(docker images | grep "pytorch-benchmark" | sed -n '1 p')
@@ -27,6 +26,7 @@ echo "Running pytorch-benchmark image ${TORCH_IMAGE_ID}, config ${CONFIG_VER}"
 
 mkdir -p ${DATA_DIR}
 
+export CUDA_VISIBLE_DEVICES=${GPU_LIST}
 # Nvidia won't let this run inside docker
 # Make sure the Nvidia GPU is in persistence mode
 sudo nvidia-smi -pm ENABLED -i ${GPU_LIST}
