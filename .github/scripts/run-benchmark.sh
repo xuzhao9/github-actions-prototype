@@ -3,6 +3,8 @@
 set -eo pipefail
 
 DATA_JSON_PREFIX=$(date +"%Y%m%d_%H%M%S")
+BENCHMARK_FILTER=$(echo ${BENCHMARK_FILTER} | xargs)
+
 export GOMP_CPU_AFFINITY="${CORE_LIST}"
 export CUDA_VISIBLE_DEVICES="${GPU_LIST}"
 
