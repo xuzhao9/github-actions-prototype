@@ -1,6 +1,11 @@
 name: pytorch-nightly-benchmarking
 on:
-   push
+   push:
+     branches:
+       master
+   workflow_dispatch:
+     tags:
+       description: 'Manually trigger the testing'
 #  schedule:
 #    - cron: '0 8 * * *' # run at 8 AM UTC
 
