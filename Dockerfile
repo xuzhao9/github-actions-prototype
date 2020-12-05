@@ -69,6 +69,8 @@ RUN --mount=type=cache,id=apt-final,target=/var/cache/apt \
         libpng-dev && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=conda-installs /opt/conda /opt/conda
+COPY requirements.txt /tmp
+RUN /opt/conda/bin/pip install -r /tmp/requirements.txt
 ENV PATH /opt/conda/bin:$PATH
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
