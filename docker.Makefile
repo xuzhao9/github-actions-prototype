@@ -25,22 +25,17 @@ BUILD_ARGS       = --build-arg BASE_IMAGE=$(BASE_IMAGE) \
 				   --build-arg CUDA_VERSION=$(CUDA_VERSION) \
 				   --build-arg INSTALL_CHANNEL=$(INSTALL_CHANNEL)
 DOCKER_BUILD     = DOCKER_BUILDKIT=1 docker build --progress=$(BUILD_PROGRESS) --target $(BUILD_TYPE) -t $(DOCKER_FULL_NAME):$(DOCKER_TAG) $(BUILD_ARGS) .
-DOCKER_PUSH      = docker push $(DOCKER_FULL_NAME):$(DOCKER_TAG)
+
+PYTORCH_VERSION  = 1.5.1
 
 .PHONY: all
 all: devel-image
 
 .PHONY: devel-image
 devel-image: BASE_IMAGE := $(BASE_DEVEL)
-devel-image: DOCKER_TAG := $(shell git describe --tags)-devel
+devel-image: DOCKER_TAG := $(PYTORCH_VERSION)-devel
 devel-image:
 	$(DOCKER_BUILD)
-
-.PHONY: devel-image
-devel-push: BASE_IMAGE := $(BASE_DEVEL)
-devel-push: DOCKER_TAG := $(shell git describe --tags)-devel
-devel-push:
-	$(DOCKER_PUSH)
 
 .PHONY: runtime-image
 runtime-image: BASE_IMAGE := $(BASE_RUNTIME)
@@ -48,12 +43,6 @@ runtime-image: DOCKER_TAG := $(shell git describe --tags)-runtime
 runtime-image:
 	$(DOCKER_BUILD)
 	docker tag $(DOCKER_FULL_NAME):$(DOCKER_TAG) $(DOCKER_FULL_NAME):latest
-
-.PHONY: runtime-image
-runtime-push: BASE_IMAGE := $(BASE_RUNTIME)
-runtime-push: DOCKER_TAG := $(shell git describe --tags)-runtime
-runtime-push:
-	$(DOCKER_PUSH)
 
 .PHONY: clean
 clean:
