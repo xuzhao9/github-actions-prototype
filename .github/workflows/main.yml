@@ -13,4 +13,5 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
-      - bash .github/scripts/build-nightly-docker.sh
+      - run: |
+          bash .github/scripts/build-nightly-docker.sh
