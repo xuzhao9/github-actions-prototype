@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PYTORCH_GITGHUB="https://github.com/pytorch/pytorch.git"
+PYTORCH_GITHUB="https://github.com/pytorch/pytorch.git"
 PYTORCH_SRC=pytorch
 
 git clone -b master --single-branch $PYTORCH_GITHUB $PYTORCH_SRC
