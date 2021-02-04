@@ -14,5 +14,5 @@ jobs:
         with:
           ref: master
       - run: |
-          bash .github/scripts/build-nightly-docker.sh
-  # Upload to ghcr.io
+          bash .github/scripts/get-other-branch.sh
+
