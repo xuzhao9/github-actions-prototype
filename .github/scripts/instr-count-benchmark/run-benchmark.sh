@@ -8,5 +8,6 @@ source ${BASEDIR}/config.env
 set +a;
 
 # Run the instruction count benchmark
-conda deactivate ${CONDA_ENV_NAME}
+eval "$(${HOME}/miniconda/bin/conda shell.bash hook)" &> /dev/null
 conda activate ${CONDA_ENV_NAME}
+conda deactivate
