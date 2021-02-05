@@ -1,8 +1,6 @@
 name: Instruction Count Nightly Testing
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 14 * * *' # run at 2 PM UTC
 jobs:
   checkout:
     runs-on: [self-hosted, bm-metal]
