@@ -8,6 +8,9 @@ PYTORCH_SRC=pytorch
 # Checkout the nightly branch and enter the directory
 git clone -b master --single-branch $PYTORCH_GITHUB $PYTORCH_SRC
 pushd $PYTORCH_SRC
+git remote -v
+
+############ End of the prelude
 
 git fetch origin nightly
 PYTORCH_NIGHTLY_COMMIT=$(git log -1 --pretty=%B origin/nightly | head -1 | \
