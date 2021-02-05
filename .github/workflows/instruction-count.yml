@@ -3,23 +3,26 @@ on:
   workflow_dispatch:
 jobs:
   checkout:
-    runs-on: [self-hosted, bm-metal]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: master
   create-nightly-env:
-    runs-on: [self-hosted, bm-metal]
+    needs: checkout
+    runs-on: ubuntu-latest
     steps:
       - run: |
           bash .github/scripts/instr-count-benchmark/create-nightly-env.sh
   run-benchmark:
-    runs-on: [self-hosted, bm-metal]
+    needs: create-nightly-env
+    runs-on: ubuntu-latest
     steps:
       - run: |
           bash .github/scripts/instr-count-benchmark/run-benchmark.sh
   remove-nightly-env:
-    runs-on: [self-hosted, bm-metal]
+    needs: run-benchmark
+    runs-on: ubuntu-latest
     steps:
       - run: |
           bash .github/scripts/instr-count-benchmark/remove-nightly-env.sh
