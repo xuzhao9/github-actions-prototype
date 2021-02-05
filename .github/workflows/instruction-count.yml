@@ -8,12 +8,16 @@ jobs:
   run-benchmark:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out
+        uses: actions/checkout@v2
         with:
           ref: master
-      - run: |
+      - name: Create nightly env
+        run: |
           bash .github/scripts/instr-count-benchmark/create-nightly-env.sh
-      - run: |
+      - name: Run Benchmark
+        run: |
           bash .github/scripts/instr-count-benchmark/run-benchmark.sh
-      - run: |
+      - name: Clean up
+        run: |
           bash .github/scripts/instr-count-benchmark/remove-nightly-env.sh
