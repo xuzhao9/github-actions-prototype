@@ -13,9 +13,9 @@ bash Miniconda3-latest-Linux-x86_64.sh -b -p ${HOME}/miniconda
 eval "$(${HOME}/miniconda/bin/conda shell.bash hook)"
 
 conda init bash; conda run /bin/bash
-conda config --set  auto_activate_base true
 
-# conda create -y -q --name ${CONDA_ENV_NAME} python=${PYTHON_VERSION}
+conda create -y -q --name ${CONDA_ENV_NAME} python=${PYTHON_VERSION}
 # Install PyTorch nightly from pip
-# conda run -n ${CONDA_ENV_NAME} pip install --pre torch \
-#     -f https://download.pytorch.org/whl/nightly/${CUDA_VERSION}/torch_nightly.html
+conda activate ${CONDA_ENV_NAME}
+pip install --pre torch \
+    -f https://download.pytorch.org/whl/nightly/${CUDA_VERSION}/torch_nightly.html
