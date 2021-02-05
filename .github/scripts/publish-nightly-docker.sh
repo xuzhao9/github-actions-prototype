@@ -5,7 +5,7 @@ set -xeuo pipefail
 PYTORCH_GITHUB="https://github.com/pytorch/pytorch.git"
 PYTORCH_SRC=pytorch
 
-pushd ../$PYTORCH_SRC
+pushd $PYTORCH_SRC
 
 ############ End of the prelude
 

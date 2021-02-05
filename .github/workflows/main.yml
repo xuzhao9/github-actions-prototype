@@ -20,5 +20,5 @@ jobs:
           ref: master
           path: pytorch
       - run: |
-          bash .github/scripts/publish-nightly-docker.sh
+          bash main/.github/scripts/publish-nightly-docker.sh
 
