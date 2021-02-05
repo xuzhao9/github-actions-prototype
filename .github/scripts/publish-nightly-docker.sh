@@ -9,11 +9,11 @@ PYTORCH_SRC=pytorch
 git clone -b master --single-branch $PYTORCH_GITHUB $PYTORCH_SRC
 pushd $PYTORCH_SRC
 git remote -v
+git branch -a
 
 ############ End of the prelude
 
 git fetch origin nightly
-git checkout --track origin/nightly
 PYTORCH_NIGHTLY_COMMIT=$(git log -1 --pretty=%B origin/nightly | head -1 | \
                              sed 's,.*(\([[:xdigit:]]*\)),\1,' | head -c 7)
 
