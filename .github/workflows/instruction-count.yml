@@ -10,5 +10,7 @@ jobs:
           ref: master
       - run: |
           bash .github/scripts/instr-count-benchmark/create-nightly-env.sh
+      - run: |
           bash .github/scripts/instr-count-benchmark/run-benchmark.sh
+      - run: |
           bash .github/scripts/instr-count-benchmark/remove-nightly-env.sh
