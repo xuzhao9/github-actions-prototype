@@ -5,11 +5,7 @@ set -xeuo pipefail
 PYTORCH_GITHUB="https://github.com/pytorch/pytorch.git"
 PYTORCH_SRC=pytorch
 
-# Checkout the nightly branch and enter the directory
-git clone -b master --single-branch $PYTORCH_GITHUB $PYTORCH_SRC
-pushd $PYTORCH_SRC
-git remote -v
-git branch -a
+pushd ../$PYTORCH_SRC
 
 ############ End of the prelude
 

@@ -13,6 +13,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
+          path: main
+      - uses: actions/checkout@v2
+        with:
+          repository: pytorch/pytorch
+          ref: master
+          path: pytorch
       - run: |
           bash .github/scripts/publish-nightly-docker.sh
 
