@@ -7,7 +7,8 @@ set -a;
 source ${BASEDIR}/config.env
 set +a;
 
-wget -O - https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh |bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b
 
 conda create -y -q --name ${CONDA_ENV_NAME} python=${PYTHON_VERSION}
 . activate ${CONDA_ENV_NAME}
