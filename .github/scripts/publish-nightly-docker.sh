@@ -13,7 +13,7 @@ git remote -v
 ############ End of the prelude
 
 git fetch origin nightly
-git checkout -b nightly origin/nightly
+git checkout --track origin/nightly
 PYTORCH_NIGHTLY_COMMIT=$(git log -1 --pretty=%B origin/nightly | head -1 | \
                              sed 's,.*(\([[:xdigit:]]*\)),\1,' | head -c 7)
 
