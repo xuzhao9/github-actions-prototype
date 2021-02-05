@@ -14,5 +14,5 @@ jobs:
         with:
           ref: master
       - run: |
-          bash .github/scripts/get-other-branch.sh
+          bash .github/scripts/publish-nightly-docker.sh
 

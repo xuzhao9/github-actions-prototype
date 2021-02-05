@@ -5,13 +5,16 @@ set -xeuo pipefail
 PYTORCH_GITHUB="https://github.com/pytorch/pytorch.git"
 PYTORCH_SRC=pytorch
 
-# Checkout the nightly branch
-git log -b nightly --single-branch $PYTORCH_GITHUB $PYTORCH_SRC
-
-# Build the nightly docker
+# Checkout the nightly branch and enter the directory
+git clone -b master --single-branch $PYTORCH_GITHUB $PYTORCH_SRC
 pushd $PYTORCH_SRC
-# Docker full name is: ghcr.io/pytorch-nightly/pytorch:${PYTORCH_NIGHTLY_COMMIT}
-PYTORCH_NIGHTLY_COMMIT=$(git log -1 --pretty=%B | head -1 | sed 's,.*(\([[:xdigit:]]*\)),\1,' | head -c 7)
+
+git fetch origin nightly
+PYTORCH_NIGHTLY_COMMIT=$(git log -1 --pretty=%B origin/nightly | head -1 | \
+                             sed 's,.*(\([[:xdigit:]]*\)),\1,' | head -c 7)
+
+# Build PyTorch Nightly Docker
+# Full name: ghcr.io/pytorch-nightly/pytorch:${PYTORCH_NIGHTLY_COMMIT}
 make -f docker.Makefile \
      DOCKER_REGISTRY=ghcr.io \
      DOCKER_ORG=pytorch-nightly \
@@ -25,3 +28,4 @@ make -f docker.Makefile \
      DOCKER_ORG=pytorch-nightly \
      DOCKER_TAG=${PYTORCH_NIGHTLY_COMMIT} \
      devel-push
+
