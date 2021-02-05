@@ -20,7 +20,6 @@ make -f docker.Makefile \
      DOCKER_ORG=pytorch-nightly \
      DOCKER_TAG=${PYTORCH_NIGHTLY_COMMIT} \
      INSTALL_CHANNEL=pytorch-nightly BUILD_TYPE=official devel-image
-popd
 
 # Push the nightly docker to GitHub Container Registry
 make -f docker.Makefile \
@@ -29,3 +28,4 @@ make -f docker.Makefile \
      DOCKER_TAG=${PYTORCH_NIGHTLY_COMMIT} \
      devel-push
 
+popd
