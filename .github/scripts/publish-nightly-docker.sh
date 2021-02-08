@@ -10,7 +10,7 @@ ls
 
 ############ End of the prelude
 
-PYTORCH_DOCKER_TAG=$(git describe --tags)-devel
+PYTORCH_DOCKER_TAG=$(git describe --tags --always)-devel
 
 # Build PyTorch nightly docker
 # Full name: ghcr.io/pytorch/pytorch-nightly:${PYTORCH_DOCKER_TAG}
