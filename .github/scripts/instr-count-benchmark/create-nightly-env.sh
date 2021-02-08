@@ -2,8 +2,10 @@
   #!/bin/sh
 
 set -xueo pipefail
+CONDA_PREFIX=${HOME}/miniconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b -p ${HOME}/miniconda
+bash Miniconda3-latest-Linux-x86_64.sh -b -p ${CONDA_PREFIX}
+eval "$(${CONDA_PREFIX}/bin/conda shell.bash hook)"
 # =========== END of prelude ===========
 
 BASEDIR=$(dirname $0)

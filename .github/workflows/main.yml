@@ -2,9 +2,6 @@ name: Build PyTorch nightly docker and push to GitHub Container Registry
 on:
   # Have the ability to trigger this job manually using the API as well
   workflow_dispatch:
-  push:
-    branches:
-      - master
 
 jobs:
   build-docker:
