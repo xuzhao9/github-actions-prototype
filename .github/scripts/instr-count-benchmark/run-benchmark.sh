@@ -6,6 +6,8 @@ BASEDIR=$(dirname $0)
 set -a;
 source ${BASEDIR}/config.env
 set +a;
+eval "$(${CONDA_PREFIX}/bin/conda shell.bash hook)"
+# ========== END of prelude
 
 conda activate ${CONDA_ENV_NAME}
 PYTORCH_VERSION=$(python -c "import torch; print(torch.__version__)")
