@@ -6,6 +6,7 @@ PYTORCH_GITHUB="https://github.com/pytorch/pytorch.git"
 PYTORCH_SRC=pytorch
 
 pushd $PYTORCH_SRC
+ls
 
 ############ End of the prelude
 

@@ -1,9 +1,6 @@
 name: Instruction Count Nightly Testing
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
 jobs:
   run-benchmark:
     runs-on: ubuntu-latest
