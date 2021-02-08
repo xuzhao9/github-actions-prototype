@@ -9,23 +9,29 @@ pushd $PYTORCH_SRC
 
 ############ End of the prelude
 
-git fetch origin nightly
-PYTORCH_NIGHTLY_COMMIT=$(git log -1 --pretty=%B origin/nightly | head -1 | \
-                             sed 's,.*(\([[:xdigit:]]*\)),\1,' | head -c 7)
+PYTORCH_DOCKER_TAG=$(git describe --tags)-devel
 
-# Build PyTorch Nightly Docker
-# Full name: ghcr.io/pytorch-nightly/pytorch:${PYTORCH_NIGHTLY_COMMIT}
+# Build PyTorch nightly docker
+# Full name: ghcr.io/pytorch/pytorch-nightly:${PYTORCH_DOCKER_TAG}
 make -f docker.Makefile \
      DOCKER_REGISTRY=ghcr.io \
-     DOCKER_ORG=pytorch-nightly \
-     DOCKER_TAG=${PYTORCH_NIGHTLY_COMMIT} \
+     DOCKER_ORG=pytorch \
+     DOCKER_IMAGE=pytorch-nightly \
+     DOCKER_TAG=${PYTORCH_DOCKER_TAG} \
      INSTALL_CHANNEL=pytorch-nightly BUILD_TYPE=official devel-image
 
-# Push the nightly docker to GitHub Container Registry
-make -f docker.Makefile \
-     DOCKER_REGISTRY=ghcr.io \
-     DOCKER_ORG=pytorch-nightly \
-     DOCKER_TAG=${PYTORCH_NIGHTLY_COMMIT} \
-     devel-push
+# Get the PYTORCH_NIGHTLY_COMMIT from the docker image
+PYTORCH_NIGHTLY_COMMIT=$(docker run \
+       pytorch/pytorch-nightly:${PYTORCH_DOCKER_TAG} \
+       python -c 'import torch; print(torch.version.git_version)' | head -c 7)
+docker tag pytorch/pytorch-nightly:${PYTORCH_DOCKER_TAG} \
+       pytorch/pytorch-nightly:${PYTORCH_NIGHTLY_COMMIT}
 
-popd
+# Push the nightly docker to GitHub Container Registry
+# echo $GHCR_PAT | docker login ghcr.io -u pytorch --password-stdin
+# make -f docker.Makefile \
+#      DOCKER_REGISTRY=ghcr.io \
+#      DOCKER_ORG=pytorch \
+#      DOCKER_IMAGE=pytorch-nightly \
+#      DOCKER_TAG=${PYTORCH_NIGHTLY_COMMIT} \
+#      devel-push
