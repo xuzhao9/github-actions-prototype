@@ -20,7 +20,7 @@ make -f docker.Makefile \
      CUDA_VERSION=11.2.0 \
      DOCKER_IMAGE=pytorch-nightly \
      DOCKER_TAG=${PYTORCH_DOCKER_TAG} \
-     INSTALL_CHANNEL=pytorch-nightly BUILD_TYPE=official devel-image
+     INSTALL_CHANNEL="pytorch-nightly -c conda-forge" BUILD_TYPE=official devel-image
 
 # Get the PYTORCH_NIGHTLY_COMMIT from the docker image
 PYTORCH_NIGHTLY_COMMIT=$(docker run \
