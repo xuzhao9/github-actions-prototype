@@ -1,0 +1,41 @@
+name: Build and test PyTorch benchmark
+on:
+  # Have the ability to trigger this job manually using the API as well
+  workflow_dispatch:
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+          path: main
+      - uses: actions/checkout@v2
+        with:
+          repository: pytorch/benchmark
+          ref: master
+          path: benchmark
+      - name: Setup CI
+        run: |
+          bash main/.github/scripts/gh-runner/setup_ci.sh
+      - name: Install Conda
+        run: |
+          bash main/.github/scripts/gh-runner/install_basics.sh
+      - name: Install CUDA 10.2
+        run: |
+          sudo bash main/.github/scripts/gh-runner/install_cuda.sh 10.2 && export PATH=/usr/local/cuda/bin/:$PATH
+      - name: Install PyTorch nightly
+        run: |
+          sudo bash main/.github/scripts/gh-runner/install_nightly.sh 10.2
+      - run:
+          name: Setup benchmark suite dependencies
+          command: . ~/miniconda3/etc/profile.d/conda.sh; conda activate base; pushd benchmark; python install.py
+      - run:
+          name: Validate training benchmark suite
+          command: . ~/miniconda3/etc/profile.d/conda.sh; conda activate base; pushd benchmark; python test.py
+      - run:
+          name: Validate pytest-benchmark invocation of training suite
+          command: pushd benchmark; ./scripts/run_bench_and_upload.sh
+
+
