@@ -28,14 +28,14 @@ jobs:
       - name: Install PyTorch nightly
         run: |
           sudo bash main/.github/scripts/gh-runner/install_nightly.sh 10.2
-      - run:
-          name: Setup benchmark suite dependencies
-          command: . ~/miniconda3/etc/profile.d/conda.sh; conda activate base; pushd benchmark; python install.py
-      - run:
-          name: Validate training benchmark suite
-          command: . ~/miniconda3/etc/profile.d/conda.sh; conda activate base; pushd benchmark; python test.py
-      - run:
-          name: Validate pytest-benchmark invocation of training suite
-          command: pushd benchmark; ./scripts/run_bench_and_upload.sh
+      - name: Setup benchmark suite dependencies
+        run: |
+          . ~/miniconda3/etc/profile.d/conda.sh; conda activate base; pushd benchmark; python install.py
+      - name: Validate training benchmark suite
+        run: |
+          . ~/miniconda3/etc/profile.d/conda.sh; conda activate base; pushd benchmark; python test.py
+      - name: Validate pytest-benchmark invocation of training suite
+        run: |
+          pushd benchmark; ./scripts/run_bench_and_upload.sh
 
 
