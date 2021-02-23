@@ -56,8 +56,7 @@ jobs:
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_cpu_lstm/result.log
           export MEM_FILE=${RESULT_DIR}/wlm_cpu_lstm/result_mem.log
-          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh \
-                python main.py --epochs 10 --model LSTM
+          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model LSTM
        - name: Run GPU WLM LSTM
          run: |
           . main/.github/scripts/release-testing.env
@@ -65,8 +64,7 @@ jobs:
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_gpu_lstm/result.log
           export MEM_FILE=${RESULT_DIR}/wlm_gpu_lstm/result_mem.log
-          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh \
-                python main.py --epochs 10 --model LSTM --cuda
+          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model LSTM --cuda
       - name: Run CPU WLM Transformer
         run: |
           . main/.github/scripts/release-testing.env
@@ -74,8 +72,7 @@ jobs:
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_cpu_trans/result.log
           export MEM_FILE=${RESULT_DIR}/wlm_cpu_trans/result_mem.log
-          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh \
-                python main.py --epochs 10 --model Transformer
+          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model Transformer
       - name: Run GPU WLM Transformer
          run: |
           . main/.github/scripts/release-testing.env
@@ -83,8 +80,7 @@ jobs:
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_gpu_trans/result.log
           export MEM_FILE=${RESULT_DIR}/wlm_gpu_trans/result_mem.log
-          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh \
-                python main.py --epochs 10 --model Transformer --cuda
+          taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model Transformer --cuda
       - name: Remove Conda env
         run: |
           conda env remove --name reltest
