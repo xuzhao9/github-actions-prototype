@@ -16,6 +16,11 @@ jobs:
         with:
           repository: pytorch/examples
           path: examples
+      - name: Checkout pytorch/benchmark
+        uses: actions/checkout@v2
+        with:
+          repository: pytorch/benchmark
+          path: benchmark
       - name: Create Conda env
         run: |
           conda create -y -n reltest python=3.8
@@ -23,9 +28,11 @@ jobs:
         run: |
           . activate reltest
           conda install -c pytorch-nightly pytorch torchtext torchvision torchaudio
-      - name: Check machine
+      - name: Check machine tuned
         run: |
           echo "Make sure the machine is tuned."
+          pushd benchmark
+          sudo python3 torchbenchmark/util/machine_config.py
       - name: Run mnist
         run: |
           . main/.github/scripts/release-testing.env; . activate reltest
@@ -33,7 +40,7 @@ jobs:
           taskset -c $CORE_LIST python main.py --epochs 1
       - name: Remove Conda env
         run: |
-          conda remove env --name reltest
+          conda env remove --name reltest
       # - name: Run mnist hogwile
       #   run: |
       #     . main/.github/scripts/release-testing.env
