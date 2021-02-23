@@ -113,11 +113,12 @@ while kill -0 "${PID_TO_WATCH}" >/dev/null 2>/dev/null; do
     done
     # Print out max every 5 seconds
     if [[ "${iteration}" -eq "10" ]]; then
-        printf "%-15s%-15s%s\n" "${MAX_GPU_MEMORY}" "${MAX_RSS_MEMORY}" "${MAX_PSS_MEMORY}" | tee $MEM_FILE
+        printf "%-15s%-15s%s\n" "${MAX_GPU_MEMORY}" "${MAX_RSS_MEMORY}" "${MAX_PSS_MEMORY}" | tee -a $MEM_FILE
         iteration=0
     else
         iteration=$((iteration+1))
     fi
     sleep 0.5
 done
-printf "%-15s%-15s%s\n" "${MAX_GPU_MEMORY}" "${MAX_RSS_MEMORY}" "${MAX_PSS_MEMORY}" | tee $MEM_FILE
+
+printf "%-15s%-15s%s\n" "${MAX_GPU_MEMORY}" "${MAX_RSS_MEMORY}" "${MAX_PSS_MEMORY}" | tee -a $MEM_FILE
