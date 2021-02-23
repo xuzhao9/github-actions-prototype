@@ -27,20 +27,17 @@ jobs:
       - name: Install pytorch nightly
         run: |
           . activate reltest
-          conda install -c pytorch-nightly pytorch torchtext torchvision torchaudio
+          pip install -r .github/scripts/pytorch-1.7.1.txt
       - name: Check machine tuned
         run: |
           echo "Make sure the machine is tuned."
           pushd benchmark
           sudo python3 torchbenchmark/util/machine_config.py
-      - name: Run mnist
+      - name: Run MNist
         run: |
           . main/.github/scripts/release-testing.env; . activate reltest
           pushd examples/mnist
           taskset -c $CORE_LIST python main.py --epochs 1
-      - name: Remove Conda env
-        run: |
-          conda env remove --name reltest
       # - name: Run mnist hogwile
       #   run: |
       #     . main/.github/scripts/release-testing.env
@@ -66,4 +63,6 @@ jobs:
       #      . main/.github/scripts/release-testing.env
       #      pushd examples/word_language_model
       #      python main.py --epochs 10 --model Transformer --cuda
-          
+      - name: Remove Conda env
+        run: |
+          conda env remove --name reltest
