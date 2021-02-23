@@ -91,7 +91,7 @@ else
 fi
 
 echo "Running  ${COMMAND_TO_RUN} > \"${LOG_FILE}\" 2>&1 &"
-/usr/bin/time -f "\nTotal time elapsed: %e" ${COMMAND_TO_RUN} > "${LOG_FILE}" 2>&1 &
+/usr/bin/time -f "\nTotal time elapsed: %e seconds." ${COMMAND_TO_RUN} > "${LOG_FILE}" 2>&1 &
 PID_TO_WATCH=$(ps aux |  grep -v 'grep' | grep -F "${COMMAND_TO_RUN}" | grep -v "$0" | awk '{print $2}' | head -1)
 trap "kill -9 ${PID_TO_WATCH} >/dev/null 2>/dev/null || exit 0" $(seq 0 15)
 MAX_GPU_MEMORY=0
