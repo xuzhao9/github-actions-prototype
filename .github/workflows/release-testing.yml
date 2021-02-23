@@ -21,7 +21,7 @@ jobs:
           conda install -c pytorch-nightly pytorch torchtext torchvision torchaudio
       - name: Check machine
         run: |
-          echo Make sure the machine is tuned."
+          echo "Make sure the machine is tuned."
       - name: Run mnist
         run: |
           . main/.github/scripts/release-testing.env
