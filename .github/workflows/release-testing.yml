@@ -24,10 +24,10 @@ jobs:
       - name: Create Conda env
         run: |
           conda create -y -n reltest python=3.8
-      - name: Install pytorch nightly
+      - name: Install pytorch 1.7.1
         run: |
           . activate reltest
-          pip install -r .github/scripts/pytorch-1.7.1.txt
+          pip install -r main/.github/scripts/pytorch-1.7.1.txt
       - name: Check machine tuned
         run: |
           echo "Make sure the machine is tuned."
