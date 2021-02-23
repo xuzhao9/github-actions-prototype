@@ -21,6 +21,7 @@ jobs:
           conda create -y -n reltest python=3.8
       - name: Install pytorch nightly
         run: |
+          . activate reltest
           conda install -c pytorch-nightly pytorch torchtext torchvision torchaudio
       - name: Check machine
         run: |
