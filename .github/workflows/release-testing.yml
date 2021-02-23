@@ -36,6 +36,7 @@ jobs:
       - name: Run MNist
         run: |
           . main/.github/scripts/release-testing.env; . activate reltest
+          mkdir -p ${RESULT_DIR}/mnist
           pushd examples/mnist
           LOG_FILE=${RESULT_DIR}/mnist/result.log
           MEM_FILE=${RESULT_DIR}/mnist/result_mem.log
