@@ -27,7 +27,7 @@ jobs:
       - name: Install pytorch 1.7.1
         run: |
           . activate reltest
-          pip install -r main/.github/scripts/pytorch-1.7.1.txt
+          conda install -y -c pytorch pytorch=1.7.1 torchvision torchtext torchaudio cudatoolkit=10.2
       - name: Check machine tuned
         run: |
           echo "Make sure the machine is tuned."
