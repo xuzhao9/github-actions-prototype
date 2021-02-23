@@ -43,7 +43,7 @@ jobs:
           taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 1
       - name: Run mnist hogwild
         run: |
-          . main/.github/scripts/release-testing.env
+          . main/.github/scripts/release-testing.env; . activate reltest
           mkdir -p ${RESULT_DIR}/mnist_hogwild
           pushd examples/mnist_hogwild
           export LOG_FILE=${RESULT_DIR}/mnist_hogwild/result.log
@@ -51,7 +51,7 @@ jobs:
           taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10
       - name: Run CPU WLM LSTM
         run: |
-          . main/.github/scripts/release-testing.env
+          . main/.github/scripts/release-testing.env; . activate reltest
           mkdir -p ${RESULT_DIR}/wlm_cpu_lstm
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_cpu_lstm/result.log
@@ -59,7 +59,7 @@ jobs:
           taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model LSTM
        - name: Run GPU WLM LSTM
          run: |
-          . main/.github/scripts/release-testing.env
+          . main/.github/scripts/release-testing.env; . activate reltest
           mkdir -p ${RESULT_DIR}/wlm_gpu_lstm
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_gpu_lstm/result.log
@@ -67,7 +67,7 @@ jobs:
           taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model LSTM --cuda
       - name: Run CPU WLM Transformer
         run: |
-          . main/.github/scripts/release-testing.env
+          . main/.github/scripts/release-testing.env; . activate reltest
           mkdir -p ${RESULT_DIR}/wlm_cpu_trans
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_cpu_trans/result.log
@@ -75,7 +75,7 @@ jobs:
           taskset -c $CORE_LIST bash ../../main/.github/scripts/monitor_proc.sh python main.py --epochs 10 --model Transformer
       - name: Run GPU WLM Transformer
          run: |
-          . main/.github/scripts/release-testing.env
+          . main/.github/scripts/release-testing.env; . activate reltest
           mkdir -p ${RESULT_DIR}/wlm_gpu_trans
           pushd examples/word_language_model
           export LOG_FILE=${RESULT_DIR}/wlm_gpu_trans/result.log
