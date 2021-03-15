@@ -17,5 +17,8 @@ jobs:
           ref: master
           path: pytorch
       - run: |
-          bash main/.github/scripts/publish-nightly-docker.sh
+          export MY_FILE_PATH="abc/dev"
+      - run: |
+          echo $MY_FILE_PATH
+          
 
