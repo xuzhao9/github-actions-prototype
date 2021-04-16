@@ -1,0 +1,16 @@
+name: Check PR body and return the content of a magic line
+
+on:
+  pull_request: 
+  workflow_dispatch:
+
+env:
+  PR_NUMBER: ${{ github.event.pull_request.number }}
+    
+jobs:
+  detect_magic:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "You are working on PR: ${{ env.PR_NUMBER }}"
+  
