@@ -12,5 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "You are working on PR: ${{ env.PR_NUMBER }}"
+          echo "You are working on PR with body: ${{ github.event.pull_request.body }}"
   
