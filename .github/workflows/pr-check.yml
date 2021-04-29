@@ -9,7 +9,7 @@ env:
     
 jobs:
   detect_magic:
-    if: if: ${{ contains(github.event.pull_request.body, 'RUN_TORCHBENCH:') }}
+    if: ${{ contains(github.event.pull_request.body, 'RUN_TORCHBENCH:') }}
     runs-on: ubuntu-latest
     steps:
       - run: |
