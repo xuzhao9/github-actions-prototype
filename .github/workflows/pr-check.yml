@@ -9,8 +9,10 @@ env:
     
 jobs:
   detect_magic:
+    if: if: ${{ contains(github.event.pull_request.body, 'RUN_TORCHBENCH:') }}
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "You are working on PR: ${{ env.PR_NUMBER }}"
+           echo ${{ github.event.pull_request.body }} > pr-body.txt
+           python3 .github/scripts/generate-torchbench-filter.py --pr-body pr-body.txt
   
