@@ -5,20 +5,15 @@ on:
 
 jobs:
   build-docker:
+    env:
+      OUTPUT_DIR: $(echo ${HOME})/.torchbench/v1-nighlty-ci
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
           ref: master
           path: main
-      - uses: actions/checkout@v2
-        with:
-          repository: pytorch/pytorch
-          ref: master
-          path: pytorch
       - run: |
-          export MY_FILE_PATH="abc/dev"
-      - run: |
-          echo $MY_FILE_PATH
-          
+          echo $OUTPUT_DIR
+         
 
