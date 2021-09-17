@@ -13,7 +13,7 @@ jobs:
         with:
           ref: master
       - run: |
-          python ./main.py
+          python3 ./main.py
       - if: env.TORCHBENCH_BISECT
         run: |
            echo "Anomaly detected! Now we need to run the bisection job."
