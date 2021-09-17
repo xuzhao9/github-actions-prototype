@@ -14,6 +14,7 @@ jobs:
           ref: master
       - run: |
           python3 ./main.py
+          echo "TORCHBENCH_BISECT=yes" >> $GITHUB_ENV
       - if: env.TORCHBENCH_BISECT
         run: |
            echo "Anomaly detected! Now we need to run the bisection job."
