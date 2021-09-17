@@ -4,9 +4,8 @@ import os
 
 print("This is an output.")
 
-e = os.environ["GITHUB_ENV"]
-print(e)
-e = e + "\n" + 'TORCHBENCH_BISECT="YES"' + "\n"
-os.environ["GITHUB_ENV"] = e
-print(e)
+fname = os.environ["GITHUB_ENV"]
+content = "TORCHBENCH_BISECT='yes'\n"
 
+with open(fname, 'a') as fo:
+    fo.write(content)
