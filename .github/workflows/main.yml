@@ -14,6 +14,11 @@ jobs:
           ref: master
           path: main
       - run: |
-          echo $OUTPUT_DIR
+          python main.py
+      - if: env.TORCHBENCH_BISECT
+        run: |
+           echo "Anomaly detected! Now we need to run the bisection job."
+      - run: |
+           echo "bisection: ${{ env.TORCHBENCH_BISECT }}"
          
 
