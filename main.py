@@ -6,7 +6,7 @@ print("This is an output.")
 
 e = os.environ["GITHUB_ENV"]
 print(e)
-e = e + 'TORCHBENCH_BISECT="YES"' + "\n"
+e = e + "\n" + 'TORCHBENCH_BISECT="YES"' + "\n"
 os.environ["GITHUB_ENV"] = e
 print(e)
 
