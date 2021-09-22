@@ -12,7 +12,7 @@ Affected tests:
 Running the bisection job:
 {bisection_job_link}
 
-cc @xuzhao9 @bitfort
+cc @xuzhao9
 """
 
 print("This is an output.")
