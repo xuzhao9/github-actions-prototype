@@ -19,5 +19,12 @@ jobs:
            echo "Anomaly detected! Now we need to run the bisection job."
       - run: |
            echo "bisection: ${{ env.TORCHBENCH_BISECT }}"
-         
+      - name: Create Issue From File
+        if: env.TORCHBENCH_BISECT
+        uses: peter-evans/create-issue-from-file@v3
+        with:
+          title: Performance Signal Detected by TorchBench CI
+          content-filepath: ./benchmark-result/report.md
+          labels: |
+            torchbench-perf-report
 
