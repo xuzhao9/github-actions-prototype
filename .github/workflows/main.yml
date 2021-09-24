@@ -6,7 +6,8 @@ on:
 jobs:
   build-docker:
     env:
-      OUTPUT_DIR: ~/.torchbench/v1-nighlty-ci
+      OUTPUT_DIR: .torchbench/v1-nighlty-ci
+      WORKFLOW_HOME: "${{ env.HOME }}/${{ env.OUTPUT_DIR }}"
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -14,6 +15,7 @@ jobs:
           ref: master
       - run: |
           python3 ./main.py
+          echo ${{ env.WORKFLOW_HOME }}
       - if: env.TORCHBENCH_BISECT
         run: |
            echo "Anomaly detected! Now we need to run the bisection job."

@@ -1,0 +1,15 @@
+name: Bisection testing workflow
+on:
+  workflow_dispatch:
+    inputs:
+      issue_name:
+        required: true
+jobs:
+  run-bisection:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@2
+        with:
+          ref: master
+      - run: |
+          echo "You are running the bisection job. Job name: ${{ github.event.inputs.issue_name }}"
