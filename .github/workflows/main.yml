@@ -30,7 +30,7 @@ jobs:
           ref: main
           propagate_failure: false
           wait_workflow: false
-          inputs: ' { issue_name: "bisection_20210908+cu102" } '
+          inputs: ' { issue_name: "bisection-issue" } '
       - name: Create Issue From File
         if: env.TORCHBENCH_BISECT
         uses: peter-evans/create-issue-from-file@v3
