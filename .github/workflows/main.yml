@@ -25,7 +25,7 @@ jobs:
         with:
           owner: xuzhao9
           repo: github-actions-prototype
-          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           workflow_file_name: bisection.yml
           ref: main
           propagate_failure: false
