@@ -21,6 +21,18 @@ jobs:
            echo "Anomaly detected! Now we need to run the bisection job."
       - run: |
            echo "bisection: ${{ env.TORCHBENCH_BISECT }}"
+      - name: Trigger another workflow from this one
+        if: env.TORCHBENCH_BISECT
+        uses: convictional/trigger-workflow-and-wait@1.3.0
+        with:
+          owner: xuzhao9
+          repo: github-actions-prototype
+          github_token: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          workflow_file_name: bisection.yml
+          ref: main
+          propagate_failure: false
+          wait_workflow: false
+          inputs: ' { issue_name: "bisection_20210908+cu102" } '
       - name: Create Issue From File
         if: env.TORCHBENCH_BISECT
         uses: peter-evans/create-issue-from-file@v3
