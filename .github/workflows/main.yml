@@ -22,7 +22,7 @@ jobs:
       - name: Trigger another workflow from this one
         if: env.TORCHBENCH_BISECT
         run: |
-          curl -u \
+          curl -u xuzhao9:${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} \
             -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/xuzhao9/github-actions-prototype/actions/workflows/6159379/dispatches \
