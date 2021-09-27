@@ -27,7 +27,7 @@ jobs:
           repo: github-actions-prototype
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           workflow_file_name: bisection.yml
-          ref: main
+          ref: master
           propagate_failure: false
           wait_workflow: false
           inputs: ' { issue_name: "bisection-issue" } '
